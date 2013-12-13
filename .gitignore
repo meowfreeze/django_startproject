@@ -1,0 +1,5 @@
+*.pyc
+media
+!media/.gitkeep
+assets
+!assets/.gitkeep
