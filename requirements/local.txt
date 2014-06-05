@@ -1,6 +1,6 @@
 -r base.txt
-Fabric==1.8.0
-coverage==3.7
-django-debug-toolbar==0.11.0
-django-extensions==1.2.5
+Fabric
+coverage
+django-debug-toolbar
+django-extensions
 
