@@ -82,6 +82,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+# additional locations of static files (compass project folder)
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+     )
+     
+STATICFILES_DIRS = (
+    (os.path.join(BASE_DIR, 'static')),
+)
+
 # static files
 
 STATIC_URL = '/assets/'
