@@ -1,16 +1,12 @@
 """
 Django settings for {{ project_name }} project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from unipath import Path
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+BASE_DIR = Path(__file__).ancestor(3)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -19,13 +15,17 @@ ADMINS = (
     ('Meow Freeze', 'meowfreeze@gmail.com'),
 )
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+# secret keys exception handling
+msg = 'set the %s environment variable'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = r'{{ secret_key }}'
+def get_env_variable(var_name):
+	try:
+		return os.environ[var_name]
+	except KeyError:
+		error_msg = msg % var_name
+		raise ImproperlyConfigured(error_msg)
 
-# Application definition
+# application definition
 DJANGO_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,12 +36,12 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    # Database migration:
+    # database migration
     'south',
 )
 
 LOCAL_APPS = (
-    # Project apps
+    # project apps
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -70,8 +70,7 @@ ROOT_URLCONF = '{{ project_name }}.urls'
 
 WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
+# internationalization
 
 LANGUAGE_CODE = 'en-us'
 
@@ -83,7 +82,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
+# static files
 
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+# media files
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
