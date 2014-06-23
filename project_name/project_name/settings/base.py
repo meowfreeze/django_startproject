@@ -90,17 +90,17 @@ STATICFILES_FINDERS = (
      )
      
 STATICFILES_DIRS = (
-    (os.path.join(BASE_DIR, 'static')),
+    (BASE_DIR.child('static')),
 )
 
 # static files
 
 STATIC_URL = '/assets/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_ROOT = BASE_DIR.child('assets')
 
 # media files
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR.child('media')
