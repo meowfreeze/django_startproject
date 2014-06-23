@@ -93,6 +93,12 @@ STATICFILES_DIRS = (
     (BASE_DIR.child('static')),
 )
 
+# additional locations of template files
+
+TEMPLATE_DIRS = (
+    (BASE_DIR.child('templates')),
+)
+
 # static files
 
 STATIC_URL = '/assets/'
