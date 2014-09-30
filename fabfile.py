@@ -2,7 +2,7 @@ import os
 
 from fabric.api import *
 
-env.hosts = ['laislama@laislamarts.org']
+env.hosts = ['']
 
 # CONFIG
 

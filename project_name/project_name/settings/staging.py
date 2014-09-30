@@ -1,10 +1,11 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['']
 
-SECRET_KEY = get_env_variable('SECRET_KEY')
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_secret('SECRET_KEY')
 
 DATABASES = {
     'default': {

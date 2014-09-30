@@ -5,7 +5,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = r'{{ secret_key }}'
+SECRET_KEY = get_secret('SECRET_KEY')
 
 THIRD_PARTY_APPS = (
     'debug_toolbar',

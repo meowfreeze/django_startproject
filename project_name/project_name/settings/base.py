@@ -15,12 +15,13 @@ ADMINS = (
     ('Meow Freeze', 'meowfreeze@gmail.com'),
 )
 
-# secret keys exception handling
-msg = 'set the %s environment variable'
+# location of secrets file
+with open(BASE_DIR.child('secrets.json')) as f:
+    secrets = json.loads(f.read())
 
-def get_env_variable(var_name):
+def get_secret(setting, secrets=secrets):
 	try:
-		return os.environ[var_name]
+		return secrets[setting]
 	except KeyError:
 		error_msg = msg % var_name
 		raise ImproperlyConfigured(error_msg)
