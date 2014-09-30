@@ -1,10 +1,8 @@
-"""
-Django settings for {{ project_name }} project.
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from unipath import Path
+import json
 import os
+
+from unipath import Path
+
 
 BASE_DIR = Path(__file__).ancestor(3)
 
