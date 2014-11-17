@@ -6,14 +6,31 @@ register = template.Library()
 
 
 @register.simple_tag
-def active(request, urls):
+def active(request, url, *args, **kwargs):
     """ 
-    add 'active' class to element if 'url_name' is in request.
-    usage: {% active request 'url_name' %} 
+    add 'active' class to element if url 'namespace:name' is in request.
     
+    USAGE: 
+    
+    returns 'active' if full url is matched:
+    
+    {% active request 'namespace:name' args %}
+    {% active request 'namespace:name' args %}
+    
+    returns 'active' if url segment is matched:
+    
+    {% active request 'namespace:name' args segment=True %}
+    {% active request 'namespace:name' args segment=True %}
     """
-    if request.path in (reverse(url) for url in urls.split()):
-        return 'active'
+    
+    segment = kwargs.get('segment')
+    
+    if segment:
+        if reverse(url, args=args) in request.path:
+            return 'active'
+    else:
+        if request.path == reverse(url, args=args):
+            return 'active'
     return ''
 
 
