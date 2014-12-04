@@ -18,11 +18,11 @@ with open(BASE_DIR.child('secrets.json')) as f:
     secrets = json.loads(f.read())
 
 def get_secret(setting, secrets=secrets):
-	try:
-		return secrets[setting]
-	except KeyError:
-		error_msg = msg % var_name
-		raise ImproperlyConfigured(error_msg)
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = msg % var_name
+        raise ImproperlyConfigured(error_msg)
 
 # application definition
 DJANGO_APPS = (
