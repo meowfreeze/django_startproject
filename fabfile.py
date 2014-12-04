@@ -39,12 +39,15 @@ PRODUCTION_SRV = '~/public_html/production'
 
 
 # DEPLOYMENT
+
+# USAGE:
+# fab deploy:[branch]
         
-def deploy(repo):
+def deploy(branch):
     
     # tests?
     
-    if repo == 'production':
+    if branch == 'production':
         
         # push master to repo
         local('git push origin master')
@@ -53,18 +56,21 @@ def deploy(repo):
         with cd(PRODUCTION_ROOT):
             run('git pull origin master')
             
-        # collectstatic
         with cd(PRODUCTION_DJANGO_ROOT), \
             prefix('workon %s' % PRODUCTION_ENV):
             
+            # collectstatic
             run('python manage.py collectstatic --settings=%s' \
                 % PRODUCTION_SETTINGS)
+            
+            # run migrations
+            run('python manage.py migrate --settings=%s' % PRODUCTION_SETTINGS)
         
         # restart application
         with cd(PRODUCTION_SRV):
             run('touch %s' % PRODUCTION_FCGI)
     
-    elif repo == 'staging':
+    elif branch == 'staging':
         
         # push staging branch to repo
         local('git push origin staging')
@@ -73,16 +79,19 @@ def deploy(repo):
         with cd(STAGING_ROOT):
             run('git pull origin staging')
         
-        # collectstatic
         with cd(STAGING_DJANGO_ROOT), \
             prefix('workon %s' % STAGING_ENV):
             
+            # collectstatic
             run('python manage.py collectstatic --settings=%s' \
                 % STAGING_SETTINGS)
+            
+            # run migrations
+            run('python manage.py migrate --settings=%s' % STAGING_SETTINGS)
         
         # restart application
         with cd(STAGING_SRV):
             run('touch %s' % STAGING_FCGI)
     
     else:
-        print 'enter a valid repo'
+        print 'enter a valid branch'
