@@ -1,3 +1,2 @@
 Pillow
-Unipath
 psycopg2
