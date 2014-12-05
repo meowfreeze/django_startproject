@@ -1,8 +1,6 @@
 import json
 import os
 
-from unipath import Path
-
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
