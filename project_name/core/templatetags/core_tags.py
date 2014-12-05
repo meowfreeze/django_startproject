@@ -14,13 +14,13 @@ def active(request, url, *args, **kwargs):
     
     returns 'active' if full url is matched:
     
-    {% active request 'namespace:name' args %}
-    {% active request 'namespace:name' args %}
+    active request 'namespace:name' args
+    active request 'namespace:name' args
     
     returns 'active' if url segment is matched:
     
-    {% active request 'namespace:name' args segment=True %}
-    {% active request 'namespace:name' args segment=True %}
+    active request 'namespace:name' args segment=True
+    active request 'namespace:name' args segment=True
     """
     
     segment = kwargs.get('segment')
