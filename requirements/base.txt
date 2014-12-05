@@ -1,4 +1,3 @@
 Pillow
-South
 Unipath
 psycopg2
