@@ -4,7 +4,7 @@ import os
 from unipath import Path
 
 
-BASE_DIR = Path(__file__).ancestor(3)
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -14,7 +14,7 @@ ADMINS = (
 )
 
 # location of secrets file
-with open(BASE_DIR.child('secrets.json')) as f:
+with open(os.path.join(BASE_DIR, 'secrets.json')) as f:
     secrets = json.loads(f.read())
 
 def get_secret(setting, secrets=secrets):
@@ -35,8 +35,6 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    # database migration
-    'south',
 )
 
 LOCAL_APPS = (
@@ -90,23 +88,23 @@ STATICFILES_FINDERS = (
      )
      
 STATICFILES_DIRS = (
-    (BASE_DIR.child('static')),
+    (os.path.join(BASE_DIR, 'static')),
 )
 
 # additional locations of template files
 
 TEMPLATE_DIRS = (
-    (BASE_DIR.child('templates')),
+    (os.path.join(BASE_DIR, 'templates')),
 )
 
 # static files
 
 STATIC_URL = '/assets/'
 
-STATIC_ROOT = BASE_DIR.child('assets')
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 # media files
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR.child('media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
