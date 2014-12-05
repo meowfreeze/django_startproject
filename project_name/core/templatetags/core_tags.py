@@ -39,7 +39,9 @@ def append_to_get(context, k, v):
     """
     add a get parameter to the parameters already present in the url
     
-    USAGE: {% append_to_get k v %}
+    USAGE: 
+    
+    append_to_get k v
     
     """
     params = context['request'].GET.copy()
