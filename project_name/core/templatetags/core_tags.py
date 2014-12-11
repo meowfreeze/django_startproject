@@ -47,7 +47,7 @@ def append_to_get(context, k, v):
     params = context['request'].GET.copy()
     
     # prevent duplicate keys
-    params.pop(k)
+    params.pop(k, None)
     
     template = '%s=%s'
     append = template % (k, v)
@@ -58,7 +58,7 @@ def append_to_get(context, k, v):
         prefix = ''
     
     result = []
-    for k, v in params.iteritems():
-        result.append(template % (k, v))
+    for k in params.keys():
+        result.append(template % (k, params[k]))
     
     return '?' + '&'.join(result) + prefix + append
