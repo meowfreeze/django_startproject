@@ -28,6 +28,6 @@
     {% include 'site/header.html' %}
     {% block content %}{% endblock %}
     {% include 'site/footer.html' %}
-    <script src="{% static 'js/site.js' %}"></script>
+    <script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>
 </body>
 </html>

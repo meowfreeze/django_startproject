@@ -1,2 +1,157 @@
 @import _normalize
 @import _reset
+
+
+// ---------------------------------------------- //
+//  MIXINS
+// ---------------------------------------------- //
+
+// media queries
+//
+// USAGE:
+//
+// +media($from: 0, $to: 768px)
+//      // css...
+//
+// +media($from: 768px, $to: 1024px)
+//      // css...
+
+@mixin media($from: false, $to: false, $dimension: width)
+    
+    @if $to and not $from
+        @media only screen and (max-#{$dimension}: $to)
+            @content
+    
+    @if $from and $to
+        @media only screen and (min-#{$dimension}: $from + 1) and (max-#{$dimension}: $to)
+            @content
+    
+    @if $from and not $to
+        @media only screen and (min-#{$dimension}: $from + 1)
+            @content
+
+
+@mixin font-smoothing
+    -webkit-font-smoothing: antialiased !important
+
+
+// ---------------------------------------------- //
+//  ANIMATIONS
+// ---------------------------------------------- //
+
+
+@keyframes fadein
+    from
+        opacity: 0
+    to
+        opacity: 1
+
+
+// ---------------------------------------------- //
+//  TYPOGRAPHY
+// ---------------------------------------------- //
+
+
+// compass vertical rhythm
+
+$base-font-family: '', sans-serif
+$base-font-size: 16px
+$base-line-height: 8px
+
++establish-baseline
+
+body
+    font-family: $base-font-family
+
+
+// baseline grid
+
+.grid-background
+    +debug-vertical-alignment()
+    background-color: rgba(0, 255, 255, .1)
+    background-image: linear-gradient(to top, rgba(0, 255, 255, .5) 7%, rgba(255, 0, 0, 0) 7%)
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    top: 0
+    z-index: $z-5
+
+
+// ---------------------------------------------- //
+//  STYLES
+// ---------------------------------------------- //
+
+
+// fix image container size, to stop collapsing.
+// containers during load. set aspect ratio in padding-bottom.
+// for images of different sizes, set padding-bottom dynamically.
+
+.img-wrapper
+    width: 100%
+    padding-bottom: 3 / 4 * 100%
+    position: relative
+    overflow: hidden
+
+.img-wrapper img
+    position: absolute
+    max-width: 100%
+    left: 0
+    top: 0
+    z-index: $z-1
+
+
+// center oversized image in container
+.oversize-center img
+    position: absolute
+    max-width: 100%
+    top: -9999px
+    bottom: -9999px
+    left: -9999px
+    right: -9999px
+    margin: auto
+
+
+// ---------------------------------------------- //
+//  STICKY FOOTER
+// ---------------------------------------------- //
+
+
+// <body>
+//     <div class='wrapper'>
+//         <p>Your website content here.</p>
+//         <div class='push'></div>
+//     </div>
+//     <div class='footer'>
+//         <p>Copyright (c) 2015</p>
+//     </div>
+// </body>
+
+
+*
+    margin: 0
+
+html, body
+    height: 100%
+
+.wrapper
+    min-height: 100%
+    height: auto !important
+    height: 100%
+
+.footer
+    display: block
+
++media($to: 960px)
+    .wrapper
+        margin: 0 auto -11em
+
+    .footer, .push
+        height: 11em
+
++media($from: 960px)
+    .wrapper
+        margin: 0 auto -3em
+
+    .footer, .push
+        height: 3em
