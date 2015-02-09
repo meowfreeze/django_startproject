@@ -62,3 +62,9 @@ def append_to_get(context, k, v):
         result.append(template % (k, params[k]))
     
     return '?' + '&'.join(result) + prefix + append
+
+
+@register.simple_tag
+def proportional(x, y, factor):
+    """ return a ratio multiplied by a factory """
+    return x / y * factor
