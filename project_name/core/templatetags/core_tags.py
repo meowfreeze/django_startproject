@@ -66,5 +66,5 @@ def append_to_get(context, k, v):
 
 @register.simple_tag
 def proportional(x, y, factor):
-    """ return a ratio multiplied by a factory """
+    """ return a ratio multiplied by a factor """
     return x / y * factor
