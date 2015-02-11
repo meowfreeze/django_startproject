@@ -5,8 +5,8 @@ from django.core.urlresolvers import reverse
 register = template.Library()
 
 
-@register.simple_tag
-def active(request, url, *args, **kwargs):
+@register.simple_tag(takes_context=True)
+def active(url, *args, **kwargs):
     """ 
     add 'active' class to element if url 'namespace:name' is in request.
     
@@ -14,15 +14,16 @@ def active(request, url, *args, **kwargs):
     
     returns 'active' if full url is matched:
     
-    active request 'namespace:name' args
-    active request 'namespace:name' args
+    active 'namespace:name' args
+    active 'namespace:name' args
     
     returns 'active' if url segment is matched:
     
-    active request 'namespace:name' args segment=True
-    active request 'namespace:name' args segment=True
+    active 'namespace:name' args segment=True
+    active 'namespace:name' args segment=True
     """
     
+    request = context['request']
     segment = kwargs.get('segment')
     
     if segment:
