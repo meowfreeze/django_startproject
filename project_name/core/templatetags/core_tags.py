@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def active(url, *args, **kwargs):
+def active(context, url, *args, **kwargs):
     """ 
     add 'active' class to element if url 'namespace:name' is in request.
     
