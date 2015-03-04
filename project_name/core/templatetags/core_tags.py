@@ -68,4 +68,6 @@ def append_to_get(context, k, v):
 @register.simple_tag
 def proportional(x, y, factor):
     """ return a ratio multiplied by a factor """
-    return x / y * factor
+    if all(isinstance(x, int) or isinstance(x, float) for x in (x, y, factor)):
+        return x / y * factor
+    return ''

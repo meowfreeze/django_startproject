@@ -1,8 +1,11 @@
 require.config({
     baseUrl: '/assets/js',
     paths : {
-        'jquery': 'lib/jquery-1.11.1.min'
+        'jquery': 'lib/jquery-1.11.1.min',
+        'retina': 'lib/retina.min'
     }
 });
 
-require(['site', 'design']);
+// uncomment for vertical type grid.
+// require(['site', 'design']);
+require(['site']);
